@@ -1,0 +1,85 @@
+TECForM 2.0
+  *  Added Mime compliancy 
+     Tecform does now generate completely Mime compliant mesages with
+     completely configurable mime types, it supports all the mime encoding
+     types (7bit,8bit,binart,quoted-printable and base64), you can even
+     make use of multiple templates and make a multipart mime message with
+     a different mime type for each part.
+  *  Added regular expressions to TECForm enabling you to set a regular
+     expression to what a field should match. This way you can completely 
+     specify what the content of a field should be, so the submitter of the 
+     form will not be able to fill in rubish
+  *  Added 'debug' function, to make it easyer to debug a mailform.
+     by turning on the debug switch you can find out whats wrong with
+     your regex definitions or mlneeded fields.
+  *  Added multiple (numbered) erordocuments, and errortexts, you can now
+     split up invalid input into (a maximum of 99) different errordocuments, 
+     to make it more clear to the submitter what he did wrong. 
+     For fast form generation you can now also use a simple errortext 
+     instead of a error document.
+  *  Added cgi admin for tecform, to make the new features easy to 
+     administer. It is now posible to do some administrative tasks
+     on tecform truegh the use of your browser.
+  *  Added administrable userbase, to make comercial exploitation of tecform
+     easier. You can now from the admin function specify either a list of
+     valid e-mail adresses, or regular expressions for e-mail adresses
+     to completely controll who could be mailed to using TECForM.
+     This makes it more easy to exploit TECForM comercialy.
+  *  Added administrable referer base. Just like with the userbase you
+     can now also truegh the admin function restrict the place a TECForM
+     html form could be submitted from.
+  *  Added the posibility to send 'local' adresses to the local mailserver
+     instead of the local machine. With the former versions of TECForM you
+     were able to restrict the use of TECForM to local users only, what
+     in fact only is usefull if the www server is the same machine mail
+     is on, what is not always the case, this problem is now fixed.
+  *  Added the posibility to send e-mail in TECBase formatting, allowing the
+     e-mail to be processed by client side TECBase complient database
+     template programs.
+  *  Made a workaround for a bug in MSIE, that seems to send %0D where it
+     should send %0A, this workaround will only work untill Microsoft
+     fixes this problem, if they do please inform me (rmeijer@xs4all.nl),
+     that will mean i will have to adapt the workaround a bit.
+  *  Added checking of sendmail return values, i know i should have done that
+     from the start, but i gues i am human to.
+  *  Added shadow function into tecform, to make shadowing more easy, 
+     remember, tecform is 'shadowware' now.
+  *  Made 'ENVIROMENT' substitution configurable. Some people seem to find
+     it scary to have users fetch their httpd's enviroment variables,
+     for that reason the enviroment stuff can now be switched off using 
+     the admin function.
+  *  'Received:' line, telling what IP the form was submitted from/
+  *  Improved setup script.
+  *  NT dir, you have now a reasonable change getting TECForM installed 
+     on NT/95
+  *  Added some more examples of TECForm html forms. 
+  *  Posibility of simple singleuser install
+  *  Response Header file.
+
+TECForM 1.0.3
+  *  The status of tecform has changed, tecform is now free of charge
+     under the condition that it is mirrored on your site.
+
+TECForM 1.0.2
+   *  Removed a litle bug in the @{}@ mechanism
+   *  Removed a bug that made the script only work with apache & netscape,
+      but that did let it die misarably on an netscape server.
+   *  Removed the part that would send a message to the author,
+      it seemed to give some troubles for some people.
+   *  Removed majure security leak, i am not going to tell you what the
+      leak whas, but i must urge you to "UPGRADE NOW !!"
+   *  Added the setup script to make it even more easy to install TECForM
+
+TECForM 1.0.1
+   *  Added enviroment variables to template, you can now use an cgi
+      enviroment variable in your mail template.
+      Interesting env variables could be:
+      REMOTE_HOST
+      REMOTE_ADDR
+      HTTP_USER_AGENT
+   *  Removed a litle bug, that made the mail end at the point of an 
+      \n\r.\n\r
+
+
+      
+

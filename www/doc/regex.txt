@@ -1,0 +1,90 @@
+              Advanced features: using regular expressions.
+
+           Together with the mlneeded fields you can use regular expressions
+           to tell TECForm under what conditions it shoul accept certain
+           fields. A field specification can be accompanied by a regular
+           expression, to tell what form a field sould have if it is filled in.
+           If a field is filled in it has to match the specified regular expression
+           in order for the input to be accepted, if the field isn't filled
+           in it is left to the mlneeded meganism to determine if the form
+           will be accepted.
+           A reggular expression is added to the name of a field in the
+           following way:
+           Lets say you have a field that is called e-mail, and it has to be a
+           string that could be a valid e-mail adres, you could do it like this:
+
+           <INPUT TYPE="TEXT" SIZE="50" NAME="e-mail:01:\w+@\w+\.[\w\.]\w">
+
+           This will tell TECForm that e-mail should concist of a string
+           mached by the regular expression:
+           \w+@\w+\.[\w\.]+\w
+           what should be a reasonable regex for an e-mail adress.
+           If the string does not matcg error 01 will be set.
+           
+----------------------------------------------------------------------
+
+              A litle regex tutorial
+
+           To help you a litle bit on your way with regular expressions,
+           i want to tell you a litle bit about the basics of regular
+           expressions, i will be in no way complete, it will be more 
+           of a quick refference, than a tutorial, but it should help
+           you a litle on your way in defining regular expressions,
+           and believe me, you do want to use them.
+           This tutorial is nothing more than a litle list of regular expression
+           characters and simple constructs, look on the net for more complete
+           descriptions on regular expressions.
+
+           Regular expressions are a way to mach a string to a sertain form,
+           in its simpelest form a regular expression 'Hi There' will match
+           the string 'Hi there', however this regular expression is not of
+           much use. 
+           If you would want strings with value's 'A' 'B' 'C' and 'D' to match
+           and other values not, you could use the regular expression '[ABCD]'
+           telling to mach a single char with one of the value's ABCD.
+           The same strings will be also matched if you use a range like this:
+           '[A-Z]' 
+           Fore some often used sets and ranges of characters there are
+           some short writings:
+
+           \s  is matched by anny whit char like a space, a tab, a cr or a nl
+           \w  is the same as [A-Za-z_0-9] 
+           \d  is the same as [0-9]
+
+           There are also some special characters you could like to match:
+
+           \n  The newline
+           \r  The CR
+           ^   The beginning of your field
+
+           Sometimes it is usefull to do negated matching, when you
+           would like to match any character but 'X' you could use:
+
+           [^X]
+
+           Finaly, sometimes you might want to match any char, in what
+           case you should use a dot in your regular expression.
+
+           Untill now we only talked about singel character matching,
+           but most of the time you would want to match more than just one
+           character. For this there are 3 important ways:
+
+           * will match for 0 or more times the preceding single char
+           regular expression, for example:
+           \d* will match '1375' , but also '29' or ''
+
+           + will do about the same, but will need at least one character,
+           so:
+           [^P]+ will match everythin that isn't '', and has not got a 'P'
+           in it, so 'Hi There' and ' ' will match but '' or 'WHATS UP' 
+           will not
+
+           ? means the preceding char should match one or zero times,
+           '\s?' will match ' ' and ''
+
+           There is also a way to do it more specific, by saying:
+           'A{3,5}' you will match 'AAA' and 'AAAAA', but not 'A' or 'AAAAAA'
+
+           I hope this litle comprehensiv tutorial is successfull in helping
+           you to using TECForm to its fullest. 
+           

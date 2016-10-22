@@ -1,0 +1,82 @@
+                          MLNEEDED fields
+
+With the use of hidden mlneeded fields in your form you can specify
+what fields the user of the form has to fill in before the mail
+will get sent. The way mlneeded fields work is that one line specifies
+a logical OR function for needed fields, and mlneeded lines relate to
+other mlneeded lines in the form of a AND function.
+In this way, all you have to do is look wat fields are needed, and than
+use a litle basic boolean algebra to get a boolean needed function
+represented as a AND function of or functions.
+
+The best way to explain this is by example, lets say you have a form
+you use to get feedback, and your form has the following fields:
+
+firstname
+lastname
+citty
+streetadress
+postalcode
+phone
+fax
+email
+
+You could decide that you need the first and the last name, and also the
+email address, and don't realy need the rest of the fields, this means
+you could use the next mlneeded lines: 
+
+firstname
+lastname
+email
+
+Writable as : a . b . c
+
+However, you could also decide that you need either a email adress, or
+a fax, or a phone number (so you have always got one fast way to
+get in contact with the person),than you could use something like:
+
+firstname
+lastname
+phone,fax,email
+
+Writable as : a . b . (c + d + e)
+
+
+When however you say that you need just a way to get in contact with the 
+person, if the person doesn't fill in phone,fax,or email, it should also
+be ok if he would fill in the citty, the streetadress and the postalcode.
+This however gives a function that is a litle more difficult,
+this function would be writable as:
+
+a.b.((c+d+e)+(f.g.h))
+This is a verry common problem, but it looks more complicated than it is.
+Using a litle basic boolean algebra this can be translated to:
+a.b.(c+d+e+f).(c+d+e+g).(c+d+e+h)
+So you end up with the following mlneeded lines: 
+
+firstname
+lastname
+phone,fax,email,citty
+phone,fax,email,streetadress
+phone,fax,email,postalcode
+
+You see that using the mlneeded mechanism, and a litle boolean algebra,
+you can specify exactly what fields should be filled in before a mail
+can be generated.
+
+Error Numbers:
+
+You should combine these values with error numbers, you could for example
+define the following mlneeded fields:
+
+mlneeded=firstname:02
+mlneeded=lastname:02
+mlneeded=phone,fax,email,citty:01
+mlneeded=phone,fax,email,streetadress:01
+mlneeded=phone,fax,email,postalcode:01
+mlerrtxt_01="You didn't fill in your fax or e-mail or citty,street and postalcode"
+mlerrtxt_02="You didn't fill in your name"
+
+If both error 01 and 02 will ocur, the highest number is chosen
+
+

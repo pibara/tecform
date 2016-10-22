@@ -1,0 +1,8 @@
+AdminHosts .*
+DenyDebug off
+DenyRefLess off
+DisableEnv off
+DisableInfo off
+RefererCheck off
+UserListActive off
+UserlistPlain off

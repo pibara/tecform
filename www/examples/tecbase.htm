@@ -1,0 +1,21 @@
+<HTML>
+This example demonstrates a form that is to be used in conjunction
+with a TECBase compliant client program.
+A TECBase compliant client program  moves the template to the client side of 
+the mail transaction, making it posible to directly ad the information to
+your local database.<br>
+If you want more info on TECBase please take a look 
+<A HREF="http://www.xs4all.nl/~rmeijer/tecform/tecbase.htm">here</A>.<br>
+<FORM ACTION="/cgi-bin/tecform.pl/debug/" METHOD="POST">
+<INPUT TYPE="hidden" NAME="mlto" VALUE="root">
+<INPUT TYPE="hidden" NAME="mlheader_from" VALUE="mailform@invalid.domain">
+<INPUT TYPE="hidden" NAME="mlheader_subject" VALUE="mailform test">
+<INPUT TYPE="text" NAME="field1"><br>
+<INPUT TYPE="hidden" NAME="mlneeded" VALUE="field1">
+<INPUT TYPE="text" NAME="field2"><br>
+<INPUT TYPE="text" NAME="field3"><br>
+<INPUT TYPE="hidden" NAME="mlneeded" VALUE="field2,field3">
+<INPUT TYPE="hidden" NAME="mltecbase" VALUE="testbase.dat">
+<INPUT TYPE="submit">
+</FORM>
+</HTML>

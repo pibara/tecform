@@ -1,0 +1,12 @@
+Comming up in TECForM 2.1 
+  *  Logging functions
+  *  Windows NT instalation script (also installing mail.exe)
+  *  Small Internal TECForM mailinglists.
+  *  rotXX encoding (just a litle gadged)
+  *  Editable tecform html header in admin function
+  *  Gateway script.
+  *  The posibility of mapping input fields to other fields.
+  *  Binary templates.
+  *  Independancy of sendmail/mail.exe, TECForM does its own SMTP.
+  *  Autoreply line
+

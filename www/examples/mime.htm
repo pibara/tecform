@@ -1,0 +1,50 @@
+<HTML>
+<FORM ACTION="/cgi-bin/tecform.pl/debug" METHOD="POST">
+Ok, now we have an example of Mime configuration, and multiple templates,
+normaly the mlencoding and mlmultipart fields would be hidden fields.<br>
+This form also shows how to use % escaping to generate HTML code in 
+a mail template.<br>
+<INPUT TYPE="hidden" NAME="mlto" VALUE="root">
+<INPUT TYPE="hidden" NAME="mlheader_from" VALUE="mailform@invalid.domain">
+<INPUT TYPE="hidden" NAME="mlheader_subject" VALUE="mailform test">
+<INPUT TYPE="text" NAME="field1"><br>
+<INPUT TYPE="text" NAME="field2"><br>
+<INPUT TYPE="text" NAME="field3"><br>
+Bodypart Encoding: <SELECT name="mlencoding">
+<OPTION>binary</OPTION>
+<OPTION>8bit</OPTION>
+<OPTION>7bit</OPTION>
+<OPTION>quoted-printable</OPTION>
+<OPTION>base64</OPTION>
+</SELECT><br>
+Multipart encoding: <SELECT name="mlmultipart">
+<OPTION>mixed</OPTION>
+<OPTION>alternative</OPTION>
+<OPTION>paralel</OPTION>
+<OPTION>non</OPTION>
+</SELECT><br>
+<INPUT TYPE="hidden" NAME="mltemplate" VALUE=
+"This is a test template,
+field1=@{field1}@, field2=@{field2}@, and field3=@{field3}@, 
+You can put anny ascii char in this template :%44. 
+There is a special way to send a @{%}@ .
+.
+You can also send an enviroment variable, you could be intrested
+that the person who mailed this mail used: @{HTTP_USER_AGENT}@, and that 
+his IP number is @{REMOTE_ADDR}@. 
+
+bye. ">
+<INPUT TYPE="hidden" NAME="mltemplate_text/html" VALUE=
+"%3CH3%3EThis is a test template%3C/H3%3E
+field1=%3CB%3E@{field1}@%3C/B%3E, field2=%3CB%3E@{field2}@%3C/B%3E,
+and field3=%3CB%3E@{field3}@%3C/B%3E, %3CBR%3E
+You can put anny ascii char in this template :%44. %3CBR%3E 
+There is a special way to send a @{%}@ .%3CBR%3E
+.%3CBR%3E
+You can also send an enviroment variable, you could be intrested
+that the person who mailed this mail used: %3CB%3E@{HTTP_USER_AGENT}@%3C/B%3E, 
+and that his IP number is %3CB%3E@{REMOTE_ADDR}@%3C/B%3E. 
+bye. ">
+<INPUT TYPE="submit">
+</FORM>
+</HTML>

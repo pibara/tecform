@@ -1,0 +1,30 @@
+So you are cursed with NT or Win95 for your WWW server, that not verry nice.
+TECForM basicaly is a program written for Unix, this is the first atempt in
+making it work with NT/95. There is no guaranty that this TECForM release 
+will actualy work with NT/95, but you are welcome to give it a try.
+There is no setup script available for NT/95 so if anyone would like to
+make one available that would be great, if you do please mail it to
+rmeijer@xs4all.nl. 
+
+First you need to have a WWW server runing  and that webserver needs to 
+ba able to run perl CGI scripts for TECForM is such a script.
+
+NT does not have sendmail, a simple program to send mails, TECForM uses 
+sendmail, so on NT/95 first you have to install mail.exe from this dir
+(This is a third party program 'Stalkers Mail.exe') so TECForM has access
+to a somewhat sendmail compliant mailer.
+
+Next you need to make the perl file complete, in this dir you will find
+a file called tecform.hdr with some variables defined, change these to
+your situation, and than take this file and the tecform.raw file in ..\SRC
+and murge them into a 'tecform.pl' file, than put this file in your
+cgi-bin directory.
+
+The last thing you need to do is making the 'data' directory and al its files
+owned by the user you are running your www server as.
+
+Now all you need to do is coppy the 'www' the documentroot of your www 
+server, and rename the dir to 'tecform'. 
+
+That about sums it up, i wish you verry much luck in installing TECForM 
+on NT/95.

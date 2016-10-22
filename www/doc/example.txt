@@ -1,0 +1,159 @@
+                              A simple example 
+
+
+
+              The tecform script is a cgi mailscript. The script enables users
+              of a server to be send an e-mail truegh an html page, in anny
+              form they wish. They could even use it to send themselves
+              html pages, or pieces of html that they could use to make new pages
+              quickly. 
+              
+              The script is a cgi script and is called from an html page.
+              For this a form is used inside the html page.
+
+              The basic  html-code for the form is:
+              <FORM ACTION="/cgi-bin/tecform.pl" METHOD="POST">
+              <INPUT TYPE="submit">
+              </FORM>
+
+              Inside this basic code you have to fill in a couple of
+              fields that the script needs: 
+                  - The fields the user could fill in
+                  - The login name of the user that will recieve the mail
+                  - The e-mail adress of the sender
+                  - The subject of the mail
+                  - A template for the e-mail
+                  - The name of the page that should be caled when a user
+                    fails to fill in all the fields that are required.
+                  - The name of the page that should be called when the mail
+                    has been send ok.
+                  - The required fields
+
+
+
+              We shal show all these fiellds and the posibilities of TECForM
+              using an example.
+  
+
+
+              <FORM ACTION="/cgi-bin/tecform.pl" METHOD="POST">
+              <INPUT TYPE="hidden" NAME="mlto" VALUE="="rmeijer">
+              <INPUT TYPE="hidden" NAME="mlheader_from"
+              VALUE="mailform@invalid.domain">
+              <INPUT TYPE="hidden" NAME="mlheader_subject"
+              VALUE="This is just a test subjectline">
+              <INPUT TYPE="hidden" NAME="mlerrurl"
+              VALUE="/="/~smurf/error.html">
+              <INPUT TYPE="hidden" NAME="mlokurl"
+              VALUE="="/~smurf/index.html">
+              Please fill in your E-Mail adres here:
+              <INPUT TYPE="text" SIZE=50 NAME="veld1">
+              <INPUT TYPE="hidden" NAME="mlneeded" VALUE="veld1">
+              Please give your name:
+              <INPUT TYPE="text" SIZE=50 NAME="veld2">
+              Type here any sugestions:
+              <TEXTAREA NAME="veld3" ROWS=24 COLS=75></TEXTAREA>
+              <INPUT TYPE="hidden" NAME="mlneeded" VALUE="veld2,veld3">
+              <INPUT TYPE="hidden" NAME="mltemplate" VALUE=
+              "Email:@{veld1}@ 
+              Naam:@{veld2}@ 
+              Remarks:@{veld3}@">
+              <INPUT TYPE="submit" VALUE="Verzenden">
+              </FORM>
+
+              Dit form makes it posible to send an e-mail to the lokal user 'rmeijer'
+              
+              The following line links the html input fields to the script:
+              <FORM ACTION="/cgi-bin/tecform.pl" METHOD="POST">
+
+              <INPUT TYPE="hidden" NAME="mlto" VALUE="="rmeijer">
+              This line tels the script to send the mail to the local user
+              (on the http server) 'rmeijer'.
+
+              <INPUT TYPE="hidden" NAME="mlheader_from
+              VALUE="mailform@invalid.domain">
+              This line sets the sender of the mail to the obvious invalid e-mail
+              adress mailform@invalid.domain, this will remind you that the sender
+              would not have to be who he sais he is.
+
+              <INPUT TYPE="hidden" NAME="mlheader_subject"
+              VALUE="This is just a test subjectline">
+              This line sets the subject of the mail that is send to
+              'This is just a test subjectline'.
+   
+              <INPUT TYPE="hidden" NAME="mlerrurl"
+              VALUE="/~rmeijer/error.html">
+              This line tels the script what file should be send if it turns
+              out that not all required fields are filled in.
+              This line specifies a so called error document.
+
+              <INPUT TYPE="hidden" NAME="mlokurl"
+              VALUE="/~rmeijer/index.html">
+              This line tels the script what file should be send if the user has filled 
+              in all fields that he should have.
+
+              <INPUT TYPE="text" SIZE=50 NAME="veld1">
+              This line specifies a userdefined input field, with the name 'veld1'
+
+  
+              It is posible to make the field just specified manditory,
+              this is done using the following line:
+              <INPUT TYPE="hidden" NAME="mlneeded" VALUE="veld1">
+              This line makes it so that if the field with the name 'veld1'
+              is not filled in, the error document is send.
+
+              <INPUT TYPE="text" SIZE=50 NAME="veld2">
+              <TEXTAREA NAME="veld3" ROWS=24 COLS=75></TEXTAREA>
+              These lines specifies two userdefined input fields with the names 'veld2'
+              and 'veld3'.
+
+              <INPUT TYPE="hidden" NAME="mlneeded" VALUE="veld2,veld3">
+              This line specifies to the script that it is manditory for the user
+              to fill in at least one of the input fields 'veld2' and 'veld3'.
+
+              <INPUT TYPE="hidden" NAME="mltemplate" VALUE=
+              "Email:@{veld1}@ 
+              Naam:@{veld2}@ 
+              Opmerking:@{veld3}@">
+
+              This line is the most important line of the form, it specifies to the
+              script what form the mail that is send has.
+              What it in fact does is specify a template for the mail, in what different
+              input fields can be filled in.
+              @{veld1}@ specifies that on that place the value the user fils in for
+              'veld1'. 
+
+              When making the template field there are three important points to
+              look at.
+
+              1.The contents of an input field can be substituded into the mail
+                by placing the name of the field between @{ and }@ like this:
+                @{veld1}@
+
+              2. Characters that have a special meaning in html can not directly be
+                 used in the template. The way to get arount this is by specifying
+                 these characters in hexadecimal notation preceded by a '%'
+                 for example %0A will be replaced in the mail by a RETURN.
+                 Here follows a short list of important characters.
+  
+                  < = %3C 
+                  > = %3E 
+                  & = %26 
+                  " = %22 
+                  ; = %3B 
+
+              3. If you wish to use the % character, you can do this as follows:
+                  @{%}@
+
+
+              There are also some special variables you can place in the template:
+               @{HTTP_USER_AGENT}    is replaced by the name of the browser the user sender
+               @{REMOTE_ADDR}        is replaced by the IP adres of the machine of the sender
+               @{REMOTE_HOST}        is replaced by the name of the machine of the sender.
+
+          
+              <INPUT TYPE="submit" VALUE="Verzenden">
+              This line creates a button the user can use to start the script.
+
+              </FORM>
+              This line ends the form.

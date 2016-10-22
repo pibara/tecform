@@ -1,0 +1,30 @@
+                      Sending mail using TECBase
+
+             The example in the file EXAMPLE shows you how to do a simple 
+             formatted e-mail, you can use this for manny things but sometimes 
+             you would like the information that is filled in to be submitted 
+             to some kind of database, so that you can process it with a
+             database program, permitting you to process the data in a more
+             profesional way. This is where TECBase comes in, TECBase is
+             a client side template program, that enables you to put the
+             information send directly into a database, witch you can than
+             process with your database programs, after what you can use
+             an other feature of TECBase to turn your database into web
+             pages that you can than put back on the internet.
+             To use TECBase you must replace the mltemplate field in
+             your form by a line like this:
+
+            <INPUT TYPE="hidden" NAME="mltecbase" VALUE="test1">
+
+            This wil tell TECForm to use a special form of mail formatting
+            that TECBase uses to see and process mails it has to process,
+            and that TECBase should use the client side database template called
+            test1.
+
+            At the moment of this release of TECForM 2.0 (Feb 97) TECBase
+            was still in the alpha stage, you can find more info on TECBase
+            on:
+           
+            http://www.xs4all.nl/~rmeijer/tecform.htm
+
+

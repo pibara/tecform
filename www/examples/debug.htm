@@ -1,0 +1,28 @@
+<HTML>
+The posibitity of the debug switch can be handy for debugging a form<br>
+<FORM ACTION="/cgi-bin/tecform.pl/debug" METHOD="POST">
+<INPUT TYPE="hidden" NAME="mlto" VALUE="root">
+<INPUT TYPE="hidden" NAME="mlheader_from" VALUE="mailform@invalid.domain">
+<INPUT TYPE="hidden" NAME="mlheader_subject" VALUE="mailform test">
+The regex for the next field is: \d+{4}\s+[A-Z]{2}<br>
+<INPUT TYPE="text" NAME="field1:01:\d{4}\s+[A-Z]{2}"><br>
+<INPUT TYPE="hidden" NAME="mlneeded:02" VALUE="field1">
+<INPUT TYPE="text" NAME="field2"><br>
+<INPUT TYPE="text" NAME="field3"><br>
+<INPUT TYPE="hidden" NAME="mlneeded:02" VALUE="field2,field3">
+<INPUT TYPE="hidden" NAME="mlerrtxt_01" VALUE="Hey, thats no good field 1 has an invalid value"> 
+<INPUT TYPE="hidden" NAME="mlerrtxt_02" VALUE="Hey, you forgot some fields"> 
+<INPUT TYPE="hidden" NAME="mltemplate" VALUE=
+"This is a test template,
+field1=@{field1}@, field2=@{field2}@, and field3=@{field3}@, 
+You can put anny ascii char in this template :%44. 
+There is a special way to send a @{%}@ .
+.
+You can also send an enviroment variable, you could be intrested
+that the person who mailed this mail used: @{HTTP_USER_AGENT}@, and that 
+his IP number is @{REMOTE_ADDR}@. 
+
+bye. ">
+<INPUT TYPE="submit">
+</FORM>
+</HTML>

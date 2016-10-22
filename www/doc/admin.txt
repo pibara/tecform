@@ -1,0 +1,63 @@
+                              TECFORM ADMIN
+
+Tecform 2.0 now comes with a new admin function, that allows an administrator
+to do some finetuning on tecform, using http.
+When you install tecform, the install script asks you for a password for 
+admin, when you ask your www server for '/cgi-bin/tecform.pl/admin/'
+tecform will ask you for a password, and will than give you the posibility
+to do some finetuning.
+
+A verry important variable you want to set is 'AdminHost' it is a regular 
+expression for the machines from who you can use the admin function, try 
+to set this as strictly as posible to make sure you are the only one using
+admin.
+
+Next tecform has some switches that you can turn on or off, they are all
+chosen in such a way that 'off' is the default value:
+
+DisableEnv	Disable enviroment substitutions in Templates, this option
+                should be turned on if you think enviroment variables
+                should not be available to the mail accounts you support.
+DenyDebug	This turns off the TECForm debug switch globaly.
+DisableInfo	When a multipart mime is defined, but only one template is
+                specified, TECForM mis-uses this to send a litle info about
+                itself in a second bodypart, you can disable this.
+UserlistActive 	This switch tels tecform to use the regular expressions
+                in the userlist to determine if a e-mail adress can be used
+                to send mail to.
+UserlistPlain	This switch tels TECForM to not see the userlist as 
+                regular expressions but as a small list of users
+RefererCheck	This option tels TECForM to use the regular expressions in
+                the refererlist to set a list of places the html form might
+                be submitted from.
+DenyRefLess	This option tels TECForM to deny all requests that don't
+                have a referer. This makes the RefererCheck option act
+                verry strictly at the expense of older or simple
+                browsers.
+
+
+The last but probably most important function for comercial exploitation  
+of tecform is the list of regular expressions to determine what e-mail 
+adressses are valid to mail to. 
+There is a litle document on regular expressions in this directory, 
+and i must sugest you will look at that.
+If you turn the userlist switch on, tecform checks the list of regular 
+expressions to see if a mail adress is allowed.
+An example, supose you want to be able to mail to everyone in 
+my.domain.com and his.domain.com, and you want to permit one specific
+person with e-mail she@her.domain.com, you just put the following lines
+in your list:
+
+.*@my\.domain\.com
+.*@his\.domain\.com
+^she@her\.domain\.com
+
+In the same way as the userlist you could use the referer list.
+
+
+HEADER
+
+A part that isn't yet in the admin function is the HEADER, if you want to 
+make the standard reply from TECForM a litle more exiting you should
+edit the html text of data/HEADER, that way you can make a custumized reply
+header for your site.

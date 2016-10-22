@@ -1,0 +1,7 @@
+$SENDMAIL = "C:\TECFORM\NT\MAIL.EXE";  
+$REMOTE_OK = "1";                      #allow mailing outside maildomain
+$MAILDOMAIN = "localhost";             #Change this to your maildomain
+$SINGLEUSER = "";                      #If there is only to be one user, fill in the username here
+$DATADIR = "C:\TECFORM\NT\DATA";       
+$SHADOW = "http://localhost/tecform/"; #put the url of your shadow here
+$VERSION = "1.2.0.NT.a1";

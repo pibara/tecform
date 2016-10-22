@@ -1,0 +1,27 @@
+<HTML>
+Exept for errortexts we can use error documents<br>
+<FORM ACTION="/cgi-bin/tecform.pl" METHOD="POST">
+<INPUT TYPE="hidden" NAME="mlto" VALUE="root">
+<INPUT TYPE="hidden" NAME="mlheader_from" VALUE="mailform@invalid.domain">
+<INPUT TYPE="hidden" NAME="mlheader_subject" VALUE="mailform test">
+<INPUT TYPE="hidden" NAME="mlerrurl" VALUE="/tecform/examples/mailerr.htm">
+<INPUT TYPE="hidden" NAME="mlokurl" VALUE="/tecform/examples/mailok.htm">
+<INPUT TYPE="text" NAME="field1"><br>
+<INPUT TYPE="hidden" NAME="mlneeded" VALUE="field1">
+<INPUT TYPE="text" NAME="field2"><br>
+<INPUT TYPE="text" NAME="field3"><br>
+<INPUT TYPE="hidden" NAME="mlneeded" VALUE="field2,field3">
+<INPUT TYPE="hidden" NAME="mltemplate" VALUE=
+"This is a test template,
+field1=@{field1}@, field2=@{field2}@, and field3=@{field3}@, 
+You can put anny ascii char in this template :%44. 
+There is a special way to send a @{%}@ .
+.
+You can also send an enviroment variable, you could be intrested
+that the person who mailed this mail used: @{HTTP_USER_AGENT}@, and that 
+his IP number is @{REMOTE_ADDR}@. 
+
+bye. ">
+<INPUT TYPE="submit">
+</FORM>
+</HTML>

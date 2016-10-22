@@ -1,0 +1,289 @@
+Stalker's SMTP Mailer V1.12          12.13.96 / Eric Voisard
+============================================================
+
+Copyright (c) Stalker Lab (SaRL), Switzerland
+All Rights Reserved.
+
+S T A L K E R  SaRL
+Jaquet-Droz 18
+2300 La Chaux-de-Fonds
+Switzerland
+
+phone: +41 32 912 5666
+fax: +41 32 912 5667
+email:	tech@stalkerlab.ch
+
+The Stalker's Mailers home page with FAQ and examples is at:
+http://www.stalkerlab.ch/SMailers/index.html
+
+
+Stalker's SMTP Mailer is freeware and can be freely distributed.
+The Software is provided on an "AS IS" basis, without warranty of any
+kind. Eric Voisard and Stalker Lab decline any responsability in the
+eventuality of damages caused by the use of this software.
+
+
+
+INTRODUCTION
+------------
+
+Stalker's SMTP Mailer is a simple mail sender (not receiver) to use
+from command prompt. It was written for use in conjunction with CGI
+scripts. It has a command line syntax similar to BSD UNIX and then
+minor changes will be needed to port UNIX scripts on NT.
+ 
+Stalker's SMTP mailer is MIME compliant (useful for countries other
+than US!). It allows file attachments.
+
+As a 32bits app, it requires Microsoft Windows NT or (at least)
+Windows 95. Microsoft's TCP/IP stack must be up and running.
+
+
+
+INSTALLATION
+------------
+
+Put mail.exe in any directory, and mail.ini in the Windows directory.
+Program location can be appended to the PATH environment variable in
+order to run mail.exe from other directories.
+The app creates temporary files for attachments, so it's better to have
+a TEMP or TMP environment variable.
+An optional environment variable can be added to override the search of
+mail.ini in Windows directory and the writing of output files in the
+current one:
+
+SET SM=C:\WIN32APP\MAIL
+  
+This allows a multiusers configuration:
+
+SET SM=C:\USERS\%USERNAME%\MAIL
+
+To find mail.ini, Mail.exe first checks if there is a SET variable,
+afterwhat it checks current directory, and finally it checks Windows
+directory.
+  
+Note:
+If your httpd runs as SYSTEM user (and not as a custom pseudo-user),
+in order to run the app within a CGI, the environment variables
+must be "system" (not "user") ones, and must be set from:
+"Control Panel" > "System" > "System environment variables".
+BTW: Don't forget to reboot!
+
+
+SYNTAX
+------
+
+mail [-s subject] [-f body] [-c cc-addr] [-b bcc-addr] [-a attach-list] to-addr...
+
+-s subject
+Specifie subject on command line (only the first argument after
+the -s flag will be used as a subject; be careful to quote ("...")
+subjects containing spaces.)
+
+-f body
+Specifie a text file to use as mail body.
+
+-c cc-addr
+Send Carbon-copies (Cc:) to a comma-separated list of recipients.
+
+-b bcc-addr
+Send Blind-carbon-copies (Bcc:) to a comma-separated list of recipients.
+
+-a attach-list
+Attach a comma-separated list of files.
+
+to-addr
+Send mail (To:) to a list of recipents. Must be at the end of command
+line, and at least one is needed.
+
+You can specifie up to 100 recipients at all.
+You can attach up to 100 files.
+
+
+RETURN VALUES
+-------------
+On exit, mail.exe returns several values which can be used within scripts
+calling the program. They are:
+
+0	:Success exit
+1	:Invalid parameters error
+2	:Invalid mail.ini error
+3	:TCP/IP error
+4	:SMTP error
+5	:Mail not sent (bad recipients)
+6	:Mail partially sent (some bad recipients)
+7	:Program failure
+
+
+SENDING MAIL
+------------
+
+To send a message to one or more people, mail can be invoked with
+arguments which are the names of people to whom the mail will be send.
+Yo are then expected to type in your message followed by an <ctrl-Z>.
+
+Some command lines examples are:
+
+mail -s "My subject" -c riri@stalkerlab.ch,fifi@stalkerlab.ch loulou@stalkerlab.ch
+(two Cc: recipients plus one To: recipient)
+
+mail -s "My subject" -c riri@stalkerlab.ch fifi@stalkerlab.ch loulou@stalkerlab.ch
+(one Cc: recipients plus two To: recipients)
+
+mail -s "My subject" -c riri@stalkerlab.ch -b fifi@stalkerlab.ch loulou@stalkerlab.ch
+(one Cc: recipient, plus one Bcc: recipient plus one To: recipient)
+
+mail -s "Your files..." -a c:\autoexec.bat,"c:\long name\image.gif" riri@stalkerlab.ch
+(send two files, one is quoted because it has long name with space)
+
+
+Instead of manually enter your mail body, you can do pipes or files
+redirections, this is useful for CGIs:
+
+mail -s "My subject" voisard@dial.eunet.ch < body.txt > process.log
+(will use the file body.txt as mail body, and will verbose the process
+to a log file)
+
+echo BodyBuffer ¦ mail -s "My subject" voisard@dial.eunet.ch > process.log
+(will take the output of echo as mail body, and will verbose the
+process to a log file)
+
+mail -s "My subject" -f body.txt voisard@dial.eunet.ch > process.log
+(will use the file body.txt as mail body, and will verbose the process
+to a log file)
+
+There is no limit with body size, but each line can't be longer than
+1000 chars and MUST be ended with CR/LF (Carriage-Return and Line-Feed).
+Note that UNIX style (LF alone) will work, but Macintosh type (CR
+alone) will not.
+
+
+
+ERRORS
+------
+
+The output of mail verboses all the sending process. 
+If the mail message was present before an error occured, or if the
+mail was not or partially sent for any reason, it is appended to the
+file dead.letter.txt. So it is possible to handle it manually as a last
+resort.
+
+
+
+Mail.ini
+--------
+
+Some setting must be specified in the mail.ini:
+
+Gateway=
+Name of the SMTP relay
+
+Sender=
+Email address of the sender which will appear in the "From:" field of
+the mail header. 
+
+Realname=
+Real name of the sender which will also appear in the "From:" field of
+the mail header.
+
+Textencode=
+This is a MIME encoding parameter. Stalker's Mailer uses MIME specs
+declarations and encoding.
+If Textencode=no, mail will be sent 8bits MIME to the mail relay without
+encoding.
+If Textencode=yes, mail will be sent 7bits Quoted-printable MIME encoded.
+This setting depends on the mail relay capabilities to handle 8bits
+chars, but it is more reliable to force 7bits encoding.
+
+AttachInline=
+Some mail readers allow to append attachments like images or HTML on the
+message. This setting specifies if attachments must be handled as
+separate files, or if they can be showed in line, within the message. 
+
+Charset=
+Specifies the local charset used (e.g. US = us-ascii; Latin = iso-8859-1)
+
+
+The [MIME Types] section specifies some well known MIME types, based
+on files extensions. When mail.exe doesn't find any matchs with
+the file to be attached, it uses application/octet-stream as default.
+Adding new MIME types is allowed, but be sure to add corrects MIME types.
+If you plan to use some private types for internal use, you must append
+the prefix "X-" to your type, i.e:
+
+yours=application/X-yours
+
+So files with .yours as extension can be handled as you want by some mail
+readers understanding X-yours.
+
+
+
+REFERENCES
+----------
+
+ [1] J. Postel,
+"SMTP (Simple Mail Transfert Protocol)", RFC 821,  ISI, August 1982
+
+ [2] Crocker, D.,
+"Standard for the Format of ARPA Internet Text Messages", STD 11,
+RFC 822, UDEL, August 1982.
+
+ [3] Borenstein N., and N. Freed
+"MIME (Multipurpose Internet Mail Extensions)
+Part One:  Mechanisms for Specifying and Describing the Format of
+Internet Message Bodies", RFC 1521, Bellcore, Innosoft, September 1993.
+
+ [4] K. Moore
+"MIME (Multipurpose Internet Mail Extensions)
+Part Two: Message Header Extensions for Non-ASCII Text", RFC 1522,
+University of Tennessee, September 1993.
+
+
+
+HISTORY
+-------
+
+12.13.96	Version 1.12
+- Modified the SMTP dialog to allow mail.exe to be understood
+by some SMTP gateways.
+- Added a new switch '-f' to allow a file as mail body without
+the need of an input redirection.
+- Added more accurate return values on exit.
+
+11.04.96	Version 1.11
+- Nothing changed, except the version number to correspond with
+Stalker's Mailers V1.11 kit.
+
+10.17.96	Version 1.10
+- Added the ability to send files as attachments.
+- Added base64 encoding for attachments.
+- Changed the structure of mail.ini, allows to add MIME types.
+- Fixed a minor bug in Quoted-Printable '=' char encoding.
+- Fixed a bug causing some error messages to be printed on console
+even when console is redirected to a file.
+- Suppressed the MIME encoding of headers with us-ascii charset so
+that they are correctly handled by some 3rd mail apps.
+- Modified the code so that mail.exe now returns 0 on success exit,
+or 1 on error exit. Can be useful in some external scripts. 
+
+07.29.96	Version 1.03
+-Modified the code so that mail.exe checks for mail.ini in
+current directory, and in Windows directory.
+-Added SM environment variable to allow multiuser config.
+-Added a date stamp on messages appended to dead.letter.txt for better
+management.
+
+
+07.24.96	Version 1.02
+-Improved the MIME conversion routine.
+
+07.10.96	Version 1.01
+-Fixed minor bug causing inappropriate error message.
+-Changed a test causing the sending (RCPT TO) of recipient list
+to be stopped a first incorrect one, and mail to be unsent to
+remaining correct recipients. Now, all valid recipients will
+receive their mail.
+
+06.25.96	Version 1.00
+-First release
+

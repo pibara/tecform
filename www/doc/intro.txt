@@ -1,0 +1,52 @@
+This script is a versitile form processing script, it allows the
+creator of a form to generate a mail of the exact form he wishes.
+This script can take away the desire and the need to allow users
+to run their own cgi programs in manny cases where the user would
+want to create a simple cgi to process form data (and i am 
+convinced these are most cases). The form should contain a couple
+of fixed (hidden) fields:
+
+mlto         The (local) user the mail should be send to 
+mlneeded     A line containing the fields of which one should be
+             filled in. Each of these lines submitted should 
+             contain at least one field that is filled in.
+mlokurl,     The url or text that is taken when the fields all exist
+mloktxt      and al regular expresions set for the fields
+             match 
+mlerrurl,    The url or text that is taken if some fields are missing.
+mlerrtxt             
+mltemplate   A template for the mail that is to be sent.
+             This field contains the structure of the mail that 
+             is to be sent. It contains fieldnames that are to be 
+             filled in between '@{' and '}@'
+mlmultipart  The multipart Mime type the mail should be send as.
+mlencoding   The type of encoding for the body parts 
+             (binary,8bit,7bit,quoted-printable,base64)
+        
+Next to these hidden fields there are some fields that can be 
+either hidden or can be used as input fields in the form.
+First there are header fields, that are used in the header of
+the E-Mail,header fields start with: 'mlheader_'.
+The person creating the form can freely choose all other fields
+he wishes to use. These fields should not however start with 'ml'.
+Both the 'POST' and the 'GET' method can be user with this script. 
+The 'POST' method is recomended, for some WWW browsers seem to have a 
+strange limmit to the amount of data that can be used with the 'GET' method.
+
+As from version 2.0 of tecform the posibility exists to specify regular
+expresions for input fields, by means ot the naming of the field.
+This may lead to some incompatibilities with forms made for earlier versions
+of TECForM. It now is also posible to define multiple error documents for
+both mlneeded and regex errors, this is done by numbering both the errors
+and the regex and mlneeded fields. The numbers may range from 00 to 99,
+and if more than one error ocurs the highest number is chosen.
+
+As of the 2.0 version it is posible to leave out the mltemplate when TECForM
+is used together with the client program TECBase, when using TECBase templating
+is done on the client side, so when you are using TECBase client, al you need
+to do is include a field 'mltecbase' with the value set to the name of the
+TECBase template. At the moment this document was written TECBase was stil
+in the development phase, to check on the current state of TECBase look
+on the TECForm homepage at http://www.xs4all.nl/~rmeijer.
+For an example of a mail form see the example dir.
+

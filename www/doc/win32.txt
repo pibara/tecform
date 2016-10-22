@@ -1,0 +1,15 @@
+TECForM on NT and 95
+
+Although TECForM was written for unix platforms, and it is now only 
+running on unix systems to my knowladge, there should be no 
+reason why it could not work on NT or windows 95, as long as there is
+a good working version of both a sendmail like program and of a perl
+interpreter available.
+
+TECForM now comes with some stuff that should help you on your way in 
+seting up TECForM on a NT or 95 machine, however i must note that running
+a webserver on NT or 95 is basicaly not a very good thing, if you need
+to run a www server on a PC you should concider using Linux and Apache,
+both are freely available from the net, and together they outperform
+NT, especialy with a higher load. Also concideringsecurity holes in many
+webserver running on NT should make you think of choosing Linux.

@@ -1,0 +1,20 @@
+TECForM now is completely Mime compliant.
+You can to every detail specify a Mime message, even multipart messages 
+are posible. You could for example send info both in plain text, and in html
+formating within the same mail, and many other combinations are posible.
+
+First you can specify the encoding of the bodyparts, default 8bit is now 
+used, but with the variable 'mlencoding' you can set the encoding to
+'binary','7bit','quoted-printable'or even 'base64' encoding.
+
+There now can be multiple templates, if you specify 'mlmultipart' as either
+'mixed','alternative', or 'paralel' TECForM will make a multipart mime 
+message.
+
+The template(s) can now also have an optional mime type, default is 
+'text/plain' but by ading a mime type to the specification of mltemplate,
+you can change this, you could for example use a variable called:
+'mltemplate_text/html' as your template to set the mimetype of your 
+template to   text/html.
+
+

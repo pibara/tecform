@@ -1,0 +1,17 @@
+<HTML>
+This is the most simple (and real stupid) TECForM form, nothing fancy
+<FORM ACTION="/cgi-bin/tecform.pl" METHOD="POST">
+<INPUT TYPE="hidden" NAME="mlto" VALUE="root">
+<INPUT TYPE="hidden" NAME="mlheader_from" VALUE="mailform@invalid.domain">
+<INPUT TYPE="hidden" NAME="mlheader_subject" VALUE="mailform test">
+<INPUT TYPE="text" NAME="field1"><br>
+<INPUT TYPE="text" NAME="field2"><br>
+<INPUT TYPE="text" NAME="field3"><br>
+<INPUT TYPE="hidden" NAME="mltemplate" VALUE=
+"field1=@{field1}@, 
+field2=@{field2}@,
+field3=@{field3}@, 
+">
+<INPUT TYPE="submit">
+</FORM>
+</HTML>

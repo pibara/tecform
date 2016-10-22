@@ -1,0 +1,54 @@
+Template Extended CGI Form Mailer (TECForM) 2.0
+
+Tecform 2.0 is a shadowware CGI script that allows the mailing of a 
+completely template specified fully Mime complient mail truegh an HTML 
+mailform.
+
+It lets you specify within the mail form (in so called hidden fields) 
+a template in which different fields of the form are filled in.
+This way the output format of the mail can be exactly specified.
+
+Next to this Tecform allows you to specify within the form which fields 
+of the form are manditory an which are not. So you will not recieve a 
+mail if the form is not completely filled in with all the information 
+that you need. It also allows you to set regular expressions for fields,
+and specifiing error messages or documents when the regular expressions 
+or the required fields are not satisfied.
+
+The shadowware status of TECForm means that you can use TECForm for free
+on your server, for both commercial and non commercial purposes, but that 
+you are obliged to shadow the TECForm distibution on your site.
+Although over many people have downloaded and installed the previous 
+version of TECForm, noone seemed willing to honnor my request to shadow
+TECForm. For this reason in order to use this version of TECForm, i must
+be more explicit, if you don't shadow TECForm, you can't use TECForm. 
+
+########################################################################
+# Copyright (C) 1997  Rob J Meijer (rmeijer@xs4all.nl)                 #
+#                                                                      #
+# This program is free software; you can redistribute it and/or modify #
+# it under the terms of the GNU General Public License as published by #
+# the Free Software Foundation; either version 2 of the License.       #
+#                                                                      #
+# This program is distributed in the hope that it will be useful,      #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of       #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        #
+# GNU General Public License for more details.                         #
+#                                                                      #
+# You should have received a copy of the GNU General Public License    #
+# along with this program; if not, write to the Free Software          #
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.            #
+########################################################################
+
+* Distribution of TECForM is not only free but even manditory for its use.
+
+
+For questions and support mail: 
+rmeijer@xs4all.nl or rob@flnet.nl
+
+TECForM can be found on :
+
+* http://www.xs4all.nl/~rmeijer/tecform.htm.
+
+Hopefully this list will be a litle longer in the 2.1, so please mail me
+your shadow site URL .

@@ -1,0 +1,69 @@
+Note, tecform is a cgi program written in perl, and makes use of the 
+sendmail program, in order to properly install TECForM you need to have
+the following programs installed:
+
+* perl (both perl4 and perl5 will do)
+* sendmail, or a equivalent to sendmail
+* a httpd with cgi capabilities
+
+If you are running NT or win95 instalation 'should' also be posible but a 
+litle more difficult than with Unix. Look in the NT directory for 
+instructions.
+
+There are two ways to install tecform under Unix. 
+
+If you are a single user who has a private cgi-bin dir, you don't need to 
+run the tecform administrator of the TECForM package.
+You can skip to section 2 of this document.
+
+1) Full install Configuration of tecform.
+If you want to run a full install of tecform including the tecform
+administrator part (if you plan to use tecform for more than one adress
+you do want this) the next part is needed.
+
+Before installing tecform you need to check out a couple of things about
+the http server on your system, the setup script will try to determine 
+them for you, but its better if you look then up yourself first to be sure:
+
+* the UID the httpd is running as.
+* the url you can put the TECForM html files.
+
+In order to install this script you must do the following:
+
+* su root
+* place tecform_xxx.tar into your /usr/local dir and untar it:
+  tar xf tecform_xxx.tar
+* change dir to the source dir of tecform:
+  cd /usr/local/tecform/src/ 
+* run the setup program:
+  ./setup.pl
+  setup wil try to determine the location of a few progams, and ask you a few
+  questions, that you should be able to awnser.
+
+2) Single user Configuration of tecform
+
+If you are installing tecform for a single user (the user you are logged 
+in as) installing tecform will be much easyer for you:
+
+* place tecform_xxx.tar into your personal root dir and untar it:
+  tar xf tecform_xxx.tar
+* change dir to the source dir of tecform:
+  cd tecform/src/
+* run the setup program with the single user switch:
+  ./setup.pl -s
+  setup wil try to determine the location of a few progams, and ask you a few
+  questions, that you should be able to awnser.
+
+3) Instalation
+* copy everything in tecform/cgi-bin/ file to your cgi directory.
+* make a 'tecform' dir in your www dir, and put everything from the in 
+  tecform/www/ directory in this directory
+
+4) Admin setup
+
+If you have done a full setup, now you can call the admin function with
+your www browser with something like:
+
+http://your.host.name/cgi-bin/tecform.pl/admin/
+
+
